@@ -1,6 +1,9 @@
 // 1. First, find our UL Container
 let container= document.querySelector(".data");
 
+  //let container2 = document.querySelector(".bio")
+//add another querySelector for the story:
+
 //The title of the UL
 const title = "The Basics";
 
@@ -15,32 +18,43 @@ function reqListener () {
   let data = JSON.parse(this.responseText);
   let list = "";
 
-  //Set the title
-  theUL = `<h2>${title}</h2>`;
-
 //open the UL
-    theUL += "<ul>;"
+    list += "<ul class='characters'>" ;
 //Build the list of basic information pull from git hub
 
-    let basics;
-      basics += "<ul>";
-      container.forEach( function (thebasics) {
+    // let basics;
+    //   basics += "<ul>";
+    //   container.forEach( function (thebasics) {
 //  list the items in the li
-  list += `<li>${thebasics}</li>`;
-});
+    list += `<li>Name: <span> ${data.name}</span></li>`;
+    list += `<li class="URL">Github URL: <a href ="${data.html_url}"> GitHubUserName</a></li>`;
+    list += `<li class="email">Email: <a href="mailto:pls89144@gmail.com">pls89144@gmail.com</a></li>`;
+    list += `<li>Website: <span>${data.blog}</span></li>`;
+
 //close the ul
-template += "</ul>";
+    list += "</ul>";
+//add all <li>'s to the character container
+    container.innerHTML = list;
 
-// the fields
-// let data.name = "name";
-// let data.bio = "bio";
-// let data.html_url = "html_url";
-// let data.email = "email";
-// let data.company = "company";
-// let data.blog; "blog";
-// let data.avatar_url; "avatar";
+// add bio info to the story div
+//.bio is the class for container2
+let story = document.querySelector(".bio");
+//bio is the class within the  container2 div
+  let bio =""
+      bio = `
+    <div class="story">
+      <p><blockquote>Bio: ${data.bio}</blockquote></p>
+    </div>`;
 
+      story.innerHTML = bio ;
+      //.img is the class for continer3
+    let picture = document.querySelector(".img");
 
-  //loop is over, add all <li>'s to the character container
-    container.innerHTML = template;
+    let img =""
+        img = `
+      <div class="pic">
+          <img src = "${data.avatar_url}">
+      </div>`;
+
+      picture.innerHTML = img ;
   }
